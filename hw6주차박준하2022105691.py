@@ -63,12 +63,17 @@ for i in range(1,n+1):
 a[n+1][n] = 0
 r[n+1][n] = 0
 
+
 def printMatirxF(d):
     n = len(d[0])
     for i in range(0,n):
         for j in range(0,n):
             print(f'{d[i][j]:5.2f}', end = " ")
         print()
+
+# printMatirxF(a)
+# print()
+# printMatrix(r)
 
 #구현
 for diagonal in range(1,n):
@@ -78,14 +83,14 @@ for diagonal in range(1,n):
         min_index = -1
         min = 1583188
         for x in range(ii, j+1):
-            sum += a[x][x]
+            sum += p[x]
         for k in range(ii,j+1):
-            temp = a[ii][k-1] + a[k+1][j]
+            temp = a[ii][k-1] + a[k+1][j]+sum
             if(min > temp):
                 min  = temp
                 min_index = k
-        a[ii][j] = min + sum
-        r[ii][j] = k
+        a[ii][j] = min
+        r[ii][j] = min_index
 
 printMatirxF(a)
 print()
