@@ -1,4 +1,35 @@
-import utility
+def printMatrix(d):
+    len_rows= len(d)
+    len_cols= len(d[0])
+    for i in range(0,len_rows):
+        for j in range(0,len_cols):
+            print(f'{d[i][j]:4d}',end=" ")
+        print()
+    
+#print float matrix
+def printMatirxF(d):
+    n = len(d[0])
+    for i in range(0,n):
+        for j in range(0,n):
+            print(f'{d[i][j]:5.2f}', end = " ")
+        print()
+        
+def print_inOrder(root):
+    if not root:
+        return
+    print_inOrder(root.l_child)
+    print(root.data)
+    print_inOrder(root.r_child)
+
+def print_preOrder(root):
+    if not root:
+        return
+    print(root.data)
+    print_preOrder(root.l_child)
+    print_preOrder(root.r_child)
+
+###############
+# Q1 - 최적이진검색트리
 
 class Node:
     def __init__(self,data):
@@ -56,11 +87,45 @@ for diagonal in range(1,n):
         a[ii][j] = min + sum
         r[ii][j] = k
 
-utility.printMatirxF(a)
+printMatirxF(a)
 print()
-utility.printMatrix(r)
+printMatrix(r)
 
 root = tree(key,r,1,n)
-utility.print_inOrder(root)
+print_inOrder(root)
 print()
-utility.print_preOrder(root)
+print_preOrder(root)
+
+#####################
+#Q2 - DNA 서열 맞춤 알고리즘
+
+a=['A','C','G','A','C','T']
+b=['C','C','G','A','T','C','T']
+
+m = len(a)
+n = len(b)
+table = [[0 for j in range(0,n+1)] for i in range(0,m+1)]
+minindex = [[(0,0) for j in range(0,n+1)] for i in range(0,m+1)]
+
+for j in range(n-1,-1,-1):
+    table[m][j] = table[m][j+1]+2
+
+for i in range(m-1,-1,-1):
+    table[i][n] = table[i+1][n]+2
+
+#테이블 생성 구현
+
+printMatrix(table)
+x=0
+y=0
+
+while(x<m and y<n):
+    tx, ty = x,y
+    print(minindex[x][y])
+    (x,y) = minindex[x][y]
+    if x==tx+1 and y == ty+1:
+        print(a[tx]," ",b[ty])
+    elif x==tx and y == ty+1:
+        print(" - "," ", b[ty])
+    else:
+        print(a[x]," "," -")
