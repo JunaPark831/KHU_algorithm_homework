@@ -104,8 +104,6 @@ print_preOrder(root)
 #####################
 #Q2 - DNA 서열 맞춤 알고리즘
 
-import math
-
 a=['A','C','G','A','C','T']
 b=['C','C','G','A','T','C','T']
 
