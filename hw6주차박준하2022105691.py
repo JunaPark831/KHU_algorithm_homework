@@ -99,6 +99,8 @@ print_preOrder(root)
 #####################
 #Q2 - DNA 서열 맞춤 알고리즘
 
+import math
+
 a=['A','C','G','A','C','T']
 b=['C','C','G','A','T','C','T']
 
@@ -114,7 +116,22 @@ for i in range(m-1,-1,-1):
     table[i][n] = table[i+1][n]+2
 
 #테이블 생성 구현
-
+# penalty
+# 불일치 - 1
+# 틈 - 2
+for ai in range(m-1,-1,-1):
+    for bi in range(n-1,-1,-1):
+        penalty = not (a[ai]==b[bi]) 
+        minT = table[ai+1][bi+1] + penalty
+        minI = (ai+1, bi+1)
+        if (minT>table[ai][bi+1]+2):
+            minT=table[ai][bi+1]+2
+            minI = (ai, bi+1)
+        if (minT>table[ai+1][bi]+2):
+            minT=table[ai+1][bi]+2
+            minI = (ai+1, bi)
+        table[ai][bi] = minT
+        minindex[ai][bi] = minI
 printMatrix(table)
 x=0
 y=0
